@@ -98,6 +98,9 @@ public class DeliverParcel
             zt++;
         }
         sacar_carro(robot[zona][pos],zona,pos);
+        for(int i=pos;i<c-1;i++){
+            robot[zona][i]=robot[zona][i+1];
+        }
         parqueadero.sacar_carro(carro,hora);
         for(int i=zt;i>0;i--){
             devolver_a_posicion(parqueo_temp[i-1],zona,pos,i-1);
