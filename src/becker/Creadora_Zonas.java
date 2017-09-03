@@ -21,8 +21,8 @@ public class Creadora_Zonas {
         return zona[posicion_carro];
     }
     
-    public Carro correr_carro(int posicion_carro){
-        return zona[posicion_carro-1];
+    public void correr_carro(int posicion_carro){
+    zona[posicion_carro]=zona[posicion_carro+1];
     }
     
     public void agregar_carro(Carro carro){

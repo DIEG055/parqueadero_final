@@ -45,13 +45,10 @@ public class Zona_Parqueo {
         return j;
     }
     
-    public boolean agregar_carro_a_zona(Carro carro){
+    public void agregar_carro_a_zona(Carro carro){
         int k=mejor_zona();
-        if(zona_total[k].getContador()==5){
-            return false;
-        }else{
+        if(zona_total[k].getContador()<5){
             zona_total[k].agregar_carro(carro);
-            return true;
         }
     }
     
@@ -86,9 +83,10 @@ public class Zona_Parqueo {
     public void sacar_carro(Carro carro, double tiempo){
         int num_zona = numero_zona_parqueo(carro);
         int pos_car=zona_total[num_zona].posicion_carro_guardado(carro);
+        int cont=zona_total[num_zona].getContador();
         zona_total[num_zona].eliminar_carro(pos_car);
-        for(int i=pos_car;i<zona_total[num_zona].getContador()+1;i++){
-            zona_total[num_zona].mover_carro(i);
+        for(int i=pos_car;i<cont-1;i++){
+            zona_total[num_zona].correr_carro(i);
         }
         pagar(carro,tiempo);
     }
