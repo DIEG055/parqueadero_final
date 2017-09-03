@@ -141,34 +141,32 @@ public class DeliverParcel
     }
         //carros
         Robot[][] parqueo_r=new Robot[3][5];
+            Zona_Parqueo parqueadero1= new Zona_Parqueo(7000);
         
-        
-        Carro carro11= new Carro("ABC123",7.30);
-        Zona_Parqueo parqueadero1= new Zona_Parqueo(7000);
+        Carro carro11= new Carro("ABC2221",7.50);
         parqueadero1.agregar_carro_a_zona(carro11);
-        parqueo_r[parqueadero1.numero_zona_parqueo(carro11)][parqueadero1.posicion_carro(carro11)] = new Robot(parqueadero, 5,6, Direction.WEST,0);
-        carro11.setPosicion(parqueadero1.posicion_carro(carro11));
-        carro11.setZona(parqueadero1.numero_zona_parqueo(carro11));
-        parquear(parqueo_r[carro11.getZona()][carro11.getPosicion()],carro11.getZona(),carro11.getPosicion());
-       
+        int posicion=parqueadero1.posicion_carro(carro11);
+        int zona=parqueadero1.numero_zona_parqueo(carro11);
+        parqueo_r[zona][posicion] = new Robot(parqueadero, 5,6, Direction.WEST,0);
+        parquear(parqueo_r[zona][posicion],zona,posicion);
 
-        Carro carro12= new Carro("ABC124",7.30);
+        Carro carro12= new Carro("ABeCq2221",7.50);
         parqueadero1.agregar_carro_a_zona(carro12);
-        parqueo_r[parqueadero1.numero_zona_parqueo(carro12)][parqueadero1.posicion_carro(carro12)] = new Robot(parqueadero, 5,6, Direction.WEST,0);
-        carro12.setPosicion(parqueadero1.posicion_carro(carro12));
-        carro12.setZona(parqueadero1.numero_zona_parqueo(carro12));
-        parquear(parqueo_r[carro12.getZona()][carro12.getPosicion()],carro12.getZona(),carro12.getPosicion());
-
+        int posicion2=parqueadero1.posicion_carro(carro12);
+        int zona2=parqueadero1.numero_zona_parqueo(carro12);
+        parqueo_r[zona2][posicion2] = new Robot(parqueadero, 5,6, Direction.WEST,0);
+        parquear(parqueo_r[zona2][posicion2],zona2,posicion2);
        
-        Carro carro13= new Carro("ABC121",7.30);
+        Carro carro13= new Carro("ABC2w221",7.50);
         parqueadero1.agregar_carro_a_zona(carro13);
-        parqueo_r[parqueadero1.numero_zona_parqueo(carro13)][parqueadero1.posicion_carro(carro13)] = new Robot(parqueadero, 5,6, Direction.WEST,0);
         int posicion3=parqueadero1.posicion_carro(carro13);
         int zona3=parqueadero1.numero_zona_parqueo(carro13);
+        parqueo_r[zona3][posicion3] = new Robot(parqueadero, 5,6, Direction.WEST,0);
         parquear(parqueo_r[zona3][posicion3],zona3,posicion3);
        
+       
          
-        Carro carro14= new Carro("ABC221",7.50);
+        Carro carro14= new Carro("ABCdg221",7.50);
         parqueadero1.agregar_carro_a_zona(carro14);
         int posicion4=parqueadero1.posicion_carro(carro14);
         int zona4=parqueadero1.numero_zona_parqueo(carro14);
@@ -176,7 +174,7 @@ public class DeliverParcel
         parquear(parqueo_r[zona4][posicion4],zona4,posicion4);
        
 
-        Carro carro15= new Carro("ABddC221",7.30);
+        Carro carro15= new Carro("ABddfcpC221",7.30);
         parqueadero1.agregar_carro_a_zona(carro15);
         int posicion5=parqueadero1.posicion_carro(carro15);
         int zona5=parqueadero1.numero_zona_parqueo(carro15);
@@ -202,13 +200,13 @@ public class DeliverParcel
 
     movimiento(parqueo_r,carro14,parqueadero1,10.5);
     movimiento(parqueo_r,carro11,parqueadero1,8.5);
-
-        Carro carro18= new Carro("ABd74C2015121",7.30);
-        parqueadero1.agregar_carro_a_zona(carro18);
-        int posicion8=parqueadero1.posicion_carro(carro18);
-        int zona8=parqueadero1.numero_zona_parqueo(carro18);
-        parqueo_r[zona8][posicion8]= new Robot(parqueadero, 5,6, Direction.WEST,0);
-        parquear(parqueo_r[zona8][posicion8],zona8,posicion8);         
+       System.out.println("ganancias"+ parqueadero1.getGanancias());
+//        Carro carro18= new Carro("ABd74C2015121",7.30);
+//        parqueadero1.agregar_carro_a_zona(carro18);
+//        int posicion8=parqueadero1.posicion_carro(carro18);
+//        int zona8=parqueadero1.numero_zona_parqueo(carro18);
+//        parqueo_r[zona8][posicion8]= new Robot(parqueadero, 5,6, Direction.WEST,0);
+//        parquear(parqueo_r[zona8][posicion8],zona8,posicion8);         
 
 
    }
