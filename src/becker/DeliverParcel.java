@@ -110,8 +110,19 @@ public class DeliverParcel
             }
 
     }
-   
-   
+   public void crear(Robot[][] parqueo_r,Zona_Parqueo parqueadero,String placa,double hora,City parqueadero1){
+       Carro carro= new Carro(placa,7.50);
+       parqueadero.agregar_carro_a_zona(carro);
+       int posicion=parqueadero.posicion_carro(carro);
+       int zona=parqueadero.numero_zona_parqueo(carro);
+       parqueo_r[zona][posicion] = new Robot(parqueadero1, 5,6, Direction.WEST,0);
+       parquear(parqueo_r[zona][posicion],zona,posicion);
+   }
+
+
+    
+    
+    
    
    
    public static void main(String[] args)
@@ -143,13 +154,7 @@ public class DeliverParcel
         Robot[][] parqueo_r=new Robot[3][5];
             Zona_Parqueo parqueadero1= new Zona_Parqueo(7000);
         
-        Carro carro11= new Carro("ABC2221",7.50);
-        parqueadero1.agregar_carro_a_zona(carro11);
-        int posicion=parqueadero1.posicion_carro(carro11);
-        int zona=parqueadero1.numero_zona_parqueo(carro11);
-        parqueo_r[zona][posicion] = new Robot(parqueadero, 5,6, Direction.WEST,0);
-        parquear(parqueo_r[zona][posicion],zona,posicion);
-
+//
         Carro carro12= new Carro("ABeCq2221",7.50);
         parqueadero1.agregar_carro_a_zona(carro12);
         int posicion2=parqueadero1.posicion_carro(carro12);
@@ -157,57 +162,9 @@ public class DeliverParcel
         parqueo_r[zona2][posicion2] = new Robot(parqueadero, 5,6, Direction.WEST,0);
         parquear(parqueo_r[zona2][posicion2],zona2,posicion2);
        
-        Carro carro13= new Carro("ABC2w221",7.50);
-        parqueadero1.agregar_carro_a_zona(carro13);
-        int posicion3=parqueadero1.posicion_carro(carro13);
-        int zona3=parqueadero1.numero_zona_parqueo(carro13);
-        parqueo_r[zona3][posicion3] = new Robot(parqueadero, 5,6, Direction.WEST,0);
-        parquear(parqueo_r[zona3][posicion3],zona3,posicion3);
-       
-       
-         
-        Carro carro14= new Carro("ABCdg221",7.50);
-        parqueadero1.agregar_carro_a_zona(carro14);
-        int posicion4=parqueadero1.posicion_carro(carro14);
-        int zona4=parqueadero1.numero_zona_parqueo(carro14);
-        parqueo_r[zona4][posicion4] = new Robot(parqueadero, 5,6, Direction.WEST,0);
-        parquear(parqueo_r[zona4][posicion4],zona4,posicion4);
-       
-
-        Carro carro15= new Carro("ABddfcpC221",7.30);
-        parqueadero1.agregar_carro_a_zona(carro15);
-        int posicion5=parqueadero1.posicion_carro(carro15);
-        int zona5=parqueadero1.numero_zona_parqueo(carro15);
-        parqueo_r[zona5][posicion5]= new Robot(parqueadero, 5,6, Direction.WEST,0);
-        parquear(parqueo_r[zona5][posicion5],zona5,posicion5);
-       
         
-        Carro carro16= new Carro("ABddC781",7.30);
-        parqueadero1.agregar_carro_a_zona(carro16);
-        int posicion6=parqueadero1.posicion_carro(carro16);
-        int zona6=parqueadero1.numero_zona_parqueo(carro16);
-        parqueo_r[zona6][posicion6]= new Robot(parqueadero, 5,6, Direction.WEST,0);
-        parquear(parqueo_r[zona6][posicion6],zona6,posicion6);
-       
-        
-        Carro carro17= new Carro("ABddC201121",7.30);
-        parqueadero1.agregar_carro_a_zona(carro17);
-        int posicion7=parqueadero1.posicion_carro(carro17);
-        int zona7=parqueadero1.numero_zona_parqueo(carro17);
-        parqueo_r[zona7][posicion7]= new Robot(parqueadero, 5,6, Direction.WEST,0);
-        parquear(parqueo_r[zona7][posicion7],zona7,posicion7);  
-
-
-    movimiento(parqueo_r,carro14,parqueadero1,10.5);
-    movimiento(parqueo_r,carro11,parqueadero1,8.5);
-       System.out.println("ganancias"+ parqueadero1.getGanancias());
-//        Carro carro18= new Carro("ABd74C2015121",7.30);
-//        parqueadero1.agregar_carro_a_zona(carro18);
-//        int posicion8=parqueadero1.posicion_carro(carro18);
-//        int zona8=parqueadero1.numero_zona_parqueo(carro18);
-//        parqueo_r[zona8][posicion8]= new Robot(parqueadero, 5,6, Direction.WEST,0);
-//        parquear(parqueo_r[zona8][posicion8],zona8,posicion8);         
-
-
+      for(int i=0;i<15;i++){
+     crear(parqueo_r,parqueadero,placa,hora,parqueadero1);
+      }
    }
 } 
