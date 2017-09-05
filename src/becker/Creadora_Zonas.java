@@ -32,6 +32,10 @@ public class Creadora_Zonas {
         }
     }
     
+    public String placa_i(int i){
+        return zona[i].getPlaca();
+    }
+    
     public void eliminar_carro(int k){
         zona[k]=null;
         contador --;
@@ -60,4 +64,24 @@ public class Creadora_Zonas {
         return ac;
     }
     
+    public boolean parqueado_en_esta_zona(String placa){
+        boolean ac =false;
+        for(int i=0;i<contador;i++){
+            if(zona[i].getPlaca().equals(placa)){
+                ac=true;
+                break;
+            }
+        }
+        return ac;
+    }
+        public int carro_parqueado(String placa){
+        int k=0;
+            for(int i=0;i<contador;i++){
+            if(zona[i].getPlaca().equals(placa)){
+                 k=i;
+                break;
+            }
+        }
+        return k;
+    }
 }

@@ -1,7 +1,7 @@
 package becker;
 
 import becker.robots.*;
-
+import java.util.*;
 public class DeliverParcel
 {
     
@@ -22,7 +22,7 @@ public class DeliverParcel
         }
        derecha(carro);
         for(int i=0;i<(5-posicion);i++){
-        carro.move();
+         carro.move();
         }
         carro.turnLeft();
         carro.move();
@@ -86,7 +86,9 @@ public class DeliverParcel
         carro.move();
    }
    
-    public static void movimiento(Robot[][] robot,Carro carro,Zona_Parqueo parqueadero,double hora){
+    public static boolean movimiento(Robot[][] robot,String placa,Zona_Parqueo parqueadero,double hora){
+        if(parqueadero.existe_carro(placa)){
+        Carro carro=parqueadero.carrito(placa);
         int pos=parqueadero.posicion_carro(carro);
         int zona=parqueadero.numero_zona_parqueo(carro);
         int zt=parqueadero.getIndice_temp();
@@ -102,16 +104,21 @@ public class DeliverParcel
             robot[zona][i]=robot[zona][i+1];
         }
         parqueadero.sacar_carro(carro,hora);
-        for(int i=zt;i>0;i--){
+        int g=zt;
+        for(int i=g;i>0;i--){
             devolver_a_posicion(parqueo_temp[i-1],zona,pos,i-1);
             pos++;
-            parqueo_temp[zt]=null;
             zt--;
             }
-
+        return true;
+        }else{
+            return false;    
+        }
     }
-   public void crear(Robot[][] parqueo_r,Zona_Parqueo parqueadero,String placa,double hora,City parqueadero1){
-       Carro carro= new Carro(placa,7.50);
+   
+   
+      public static void crear(Robot[][] parqueo_r,Zona_Parqueo parqueadero,String placa,double hora,City parqueadero1){
+       Carro carro= new Carro(placa,hora);
        parqueadero.agregar_carro_a_zona(carro);
        int posicion=parqueadero.posicion_carro(carro);
        int zona=parqueadero.numero_zona_parqueo(carro);
@@ -120,14 +127,9 @@ public class DeliverParcel
    }
 
 
-    
-    
-    
-   
-   
    public static void main(String[] args)
    {  
-     
+     Scanner datos= new Scanner(System.in);
     City parqueadero = new City();
     //parqueadero
     for(int i=0;i<5;i++){
@@ -152,19 +154,63 @@ public class DeliverParcel
     }
         //carros
         Robot[][] parqueo_r=new Robot[3][5];
-            Zona_Parqueo parqueadero1= new Zona_Parqueo(7000);
+
+        System.out.println("ingrese el valor por hora que desea cobrar en el parqueadero");
+        double tarifa= datos.nextDouble();
+        Zona_Parqueo parqueadero1= new Zona_Parqueo(tarifa);
         
-//
-        Carro carro12= new Carro("ABeCq2221",7.50);
-        parqueadero1.agregar_carro_a_zona(carro12);
-        int posicion2=parqueadero1.posicion_carro(carro12);
-        int zona2=parqueadero1.numero_zona_parqueo(carro12);
-        parqueo_r[zona2][posicion2] = new Robot(parqueadero, 5,6, Direction.WEST,0);
-        parquear(parqueo_r[zona2][posicion2],zona2,posicion2);
-       
-        
-      for(int i=0;i<15;i++){
-     crear(parqueo_r,parqueadero,placa,hora,parqueadero1);
-      }
+        boolean ac=true;
+    while(ac){
+        System.out.println(""); 
+        System.out.println(""); 
+        System.out.println("1) ingresar carro");        
+        System.out.println("2) sacar carro");
+        System.out.println("3) obtener las ganancias");
+        System.out.println("4) obtener placas de vehiculos de una zona");
+        System.out.println("5) finalizar");
+        int seleccion= datos.nextInt();
+        switch(seleccion){
+            case 1:
+                System.out.println("ingrese la placa del carro ");
+                datos.nextLine();
+                String placa= datos.nextLine();
+                System.out.println("ingrese la hora de entradadel carro ");
+                
+                double hora;
+                hora=datos.nextDouble();
+                crear(parqueo_r,parqueadero1,placa,hora,parqueadero); 
+
+                break;
+            case 2:
+                System.out.println("ingrese la placa del vehiculo");
+                datos.nextLine();
+                String pla=datos.nextLine();
+                System.out.println("ingrese la hora de salida");
+               
+                double salida=datos.nextDouble();
+                boolean c=movimiento(parqueo_r,pla,parqueadero1,salida);
+                if(c==false){
+                    System.out.println("ese auto no esta parqueado");
+                }
+                break;
+            case 3:
+                System.out.println("las ganancias hasta este momento son " +parqueadero1.getGanancias());
+                break;
+            case 4:
+                System.out.println("recuerde que las zonas son 3   2   1, acorde con la animacion");
+                System.out.println("ingrese el numero de la zona");
+                int z= datos.nextInt()-1;
+                Creadora_Zonas mostrar=parqueadero1.getZona(z);
+                for(int i=0;i<mostrar.getContador();i++){
+                    System.out.println("placa posicion " + (i+1)+" : "+ mostrar.placa_i(i));
+                }
+                break;
+            case 5:
+                System.out.println("cierre la ventana de la animacion");
+                break;
+            default:
+                System.out.println("cierre la ventana de la animacion");
+        }
+    }
    }
 } 

@@ -23,6 +23,10 @@ public class Zona_Parqueo {
         return ganancias;
     }
     
+    public Creadora_Zonas zona_i(int i){
+    return zona_total[i];
+    }
+    
     public Zona_Parqueo(double tarifa){    
         this.zona_total= new Creadora_Zonas[3];
         for(int i=0;i<3;i++){
@@ -80,7 +84,7 @@ public class Zona_Parqueo {
         this.ganancias=h+this.ganancias;
     }
         
-    public void sacar_carro(Carro carro, double tiempo){
+    public void sacar_carro(Carro carro, double hora){
         int num_zona = numero_zona_parqueo(carro);
         int pos_car=zona_total[num_zona].posicion_carro_guardado(carro);
         int cont=zona_total[num_zona].getContador();
@@ -88,8 +92,25 @@ public class Zona_Parqueo {
         for(int i=pos_car;i<cont-1;i++){
             zona_total[num_zona].correr_carro(i);
         }
-        pagar(carro,tiempo);
+        pagar(carro,hora);
     }
 
-    
+    public Carro carrito(String placa){
+        Carro carro= new Carro("",0);
+        for(int i=0;i<3;i++){
+        boolean ac=zona_total[i].parqueado_en_esta_zona(placa);
+        if(ac){
+            int j =zona_total[i].carro_parqueado(placa);
+            carro=zona_total[i].mover_carro(j);
+            }
+        }
+        return carro;
+    }
+    public boolean existe_carro(String placa){
+        boolean ac=false;
+        for(int i=0;i<3;i++){
+            ac= ac ||zona_total[i].parqueado_en_esta_zona(placa);
+        }
+        return ac;
+    }
 }
